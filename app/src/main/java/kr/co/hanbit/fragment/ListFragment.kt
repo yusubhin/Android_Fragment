@@ -21,13 +21,15 @@ private const val ARG_PARAM2 = "param2"
 class ListFragment : Fragment() {
     // goDetail() 메서드를 호출해야하므로 MainActivity를 전달받는 코드를 작성
     var mainActivity: MainActivity? = null //mainActivity를 담아둘 멤버 변수 선언
+    lateinit var binding:FragmentListBinding
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
 
         /* 목록 프래그먼트의 레이아웃에 있는 버튼을 사용하기 위해서 코드 수정 */
         //return inflater.inflate(R.layout.fragment_list, container, false) //inflater로 생성한 뷰를 바로 리턴
-        val binding = FragmentListBinding.inflate(inflater, container, false)
+        binding = FragmentListBinding.inflate(inflater, container, false)
         binding.btnNext.setOnClickListener { mainActivity?.goDetail() }
 
         /* arguments 에서 값을 꺼낸 후 레이아웃에 작성해둔 텍스트뷰에 입력 */
@@ -35,6 +37,11 @@ class ListFragment : Fragment() {
         binding.textValue.text = "${arguments?.getInt("key2")}"
 
         return binding.root //onCreateView() 메서드의 반환값이 View이므로 바인딩이 가지고 있는 root 뷰를 넘겨줌
+    }
+
+    /* 액티비티로부터 전달받을 문자열을 출력하는 메서드 */
+    fun setValue(value:String) {
+        binding.textFromActivity.text = value
     }
 
     // 메서드를 오버라이드 할 때는 대부분 onCreat() 메서드 블록 바로 아랫줄에 함

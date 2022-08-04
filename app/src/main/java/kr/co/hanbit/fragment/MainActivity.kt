@@ -2,18 +2,26 @@ package kr.co.hanbit.fragment
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import kr.co.hanbit.fragment.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    lateinit var listFragment:ListFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
 
         setFragment() //프래그먼트 삽입
+
+        /* 버튼이 클릭되면 listFragment를 통해서 setValue를 호출 */
+        binding.btnSend.setOnClickListener {
+            listFragment.setValue("전달할 값")
+        }
     }
 
     fun setFragment() {
-        val listFragment: ListFragment = ListFragment()
-
+        listFragment = ListFragment()
         var bundle = Bundle() //번들 생성
         /* 번들에 전달할 값 담기 */
         bundle.putString("key1", "List Fragment")
