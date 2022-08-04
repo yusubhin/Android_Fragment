@@ -29,6 +29,11 @@ class ListFragment : Fragment() {
         //return inflater.inflate(R.layout.fragment_list, container, false) //inflater로 생성한 뷰를 바로 리턴
         val binding = FragmentListBinding.inflate(inflater, container, false)
         binding.btnNext.setOnClickListener { mainActivity?.goDetail() }
+
+        /* arguments 에서 값을 꺼낸 후 레이아웃에 작성해둔 텍스트뷰에 입력 */
+        binding.textTitle.text = arguments?.getString("key1")
+        binding.textValue.text = "${arguments?.getInt("key2")}"
+
         return binding.root //onCreateView() 메서드의 반환값이 View이므로 바인딩이 가지고 있는 root 뷰를 넘겨줌
     }
 

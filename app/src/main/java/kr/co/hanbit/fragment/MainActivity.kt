@@ -13,6 +13,13 @@ class MainActivity : AppCompatActivity() {
 
     fun setFragment() {
         val listFragment: ListFragment = ListFragment()
+
+        var bundle = Bundle() //번들 생성
+        /* 번들에 전달할 값 담기 */
+        bundle.putString("key1", "List Fragment")
+        bundle.putInt("key2", 20210101)
+        listFragment.arguments = bundle //값이 담긴 번들을 프래그먼트의 arguments에 전달
+
         val transaction = supportFragmentManager.beginTransaction() //begin transaction(액티비티가 가지고 있는 프래그먼트 매니저를 통해서 트랜잭션 시작)
         transaction.add(R.id.frameLayout, listFragment) //add fragment(frameLayout을 id로 가지고 있는 레이아웃에 listFragment 삽입)
         transaction.commit() //commit transaction(모든 작업이 정상적으로 처리되었음을 트랜젝션에 알림)
